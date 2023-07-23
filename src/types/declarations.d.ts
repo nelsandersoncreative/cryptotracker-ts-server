@@ -1,0 +1,11 @@
+declare module 'express';
+declare module 'morgan';
+declare module 'cors';
+declare module 'helmet';
+declare module 'dotenv';
+declare module 'pg';
+declare module 'bcryptjs';
+declare module 'jsonwebtoken';
+declare module 'nodemon';
+declare module 'supertest';
+declare module 'chai';

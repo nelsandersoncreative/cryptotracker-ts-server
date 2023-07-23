@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap');
+
+body {
+    background-color: black;
+    color: #5fff17;
+    font-family: 'Oxygen Mono', monospace;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+h1 {
+    border: 1px solid #5fff17;
+    padding: 1rem;
+    border-radius: .5rem;
+    text-align: center;
+}
+
+.endpoint {
+    list-style: none;
+    display: flex;
+    padding: 1rem;
+}
+
+.endpoint > div {
+    width: 300px;
+    border: 1px solid #5fff17;
+    padding: 1rem;
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-corner {
+    background-color: black;
+}

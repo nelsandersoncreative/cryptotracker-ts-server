@@ -1,0 +1,45 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CryptoTracker Service</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <div>
+      <h1><%= message %></h1>
+      <h2>Routes:</h2>
+      <div>
+        <h3>Auth</h3>
+        <div class="endpoint">
+          <div>Register User</div>
+          <div>POST api/auth/register</div>
+        </div>
+        <div class="endpoint">
+          <div>Login</div>
+          <div>POST api/auth/login</div>
+        </div>
+        <div class="endpoint">
+          <div>Remove user</div>
+          <div>DELETE api/users/:id</div>
+        </div>
+        <div class="endpoint">
+          <div>Get Coins Data</div>
+          <div>POST api/cryptoCompare/coins</div>
+        </div>
+        <div class="endpoint">
+          <div>Get Coin List</div>
+          <div>GET api/cryptoCompare/coin-list</div>
+        </div>
+        <div class="endpoint">
+          <div>Get User's Coin List</div>
+          <div>GET api/user-coins/:user_id</div>
+        </div>
+        <div class="endpoint">
+          <div>Add coins to user's coin list</div>
+          <div>PUT api/user-coins/add-coins/</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
