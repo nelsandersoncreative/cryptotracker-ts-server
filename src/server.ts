@@ -32,5 +32,10 @@ const db = knex({
 server.set('db', db);
 
 createTables(db); // Check if tables exist, if they don't run migrations
-console.log('PORT', PORT)
+console.log('PORT', PORT);
+console.log('db', db);
+console.log('NODE_ENV', NODE_ENV)
+console.log('DB_NAME', DB_NAME)
+console.log('DB_USER', DB_USER)
+console.log('DB_PORT', DB_PORT)
 server.listen(PORT, () => console.debug(`Server listening on port: ${PORT}`));

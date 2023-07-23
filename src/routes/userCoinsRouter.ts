@@ -46,19 +46,21 @@ userCoinsRouter
 
     if (!id) return next({status: 400, message: 'user_id is required'});
 
-    const coinsArray = await UserCoinsService.getUserCoins(app.get('db'), id);
-
-    const noCoins = coinsArray.length === 0;
     let response;
+    try {
+      const coinsArray = await UserCoinsService.getUserCoins(app.get('db'), id);
+      const noCoins = coinsArray.length === 0;
 
-    if (noCoins) {
-      response = await UserCoinsService.createCoinsList(app.get('db'), coins, id);
-    } else {
-      response = await UserCoinsService.updateCoinsArray(app.get('db'), coins, id);
-    }
-
-    if (!response) {
-      return next({ status: 500, message: 'No data found.' });
+      if (noCoins) {
+        response = await UserCoinsService.createCoinsList(app.get('db'), coins, id);
+      } else {
+        response = await UserCoinsService.updateCoinsArray(app.get('db'), coins, id);
+      }
+      if (!response) {
+        return next({ status: 500, message: 'No data found.' });
+      }
+    } catch (error) {
+      return next({ status: 401, message: error });
     }
 
     return response;

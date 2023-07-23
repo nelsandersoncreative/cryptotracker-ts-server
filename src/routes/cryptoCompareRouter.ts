@@ -17,13 +17,17 @@ cryptoCompareRouter
   .route('/coin-list')
   .get(requireAuth, async (req: Request, res: Response, next: NextFunction) => {
     const { params: { id } } = req;
-    const { data } = await CryptoCompareService.getCoinList();
-    const formattedData = Object.values(data.Data);
+    try {
+      const { data } = await CryptoCompareService.getCoinList();
+      const formattedData = Object.values(data.Data);
 
-    if (data) {
-      return res.json(formattedData);
-    } else {
-      return next({status: 404, message: `Unable to find a list of coins with id: ${id}`});
+      if (data) {
+        return res.json(formattedData);
+      } else {
+        return next({status: 404, message: `Unable to find a list of coins with id: ${id}`});
+      }
+    } catch (error) {
+      console.error(error);
     }
   });
 
