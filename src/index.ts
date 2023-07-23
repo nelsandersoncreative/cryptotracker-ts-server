@@ -16,29 +16,29 @@ type MorganOption = 'tiny' | 'common';
 
 const { NODE_ENV } = config;
 
-const app: Express = express();
+const server: Express = express();
 
 // env variables for localhost and heroku
 const isProduction = NODE_ENV === ENVIRONMENTS.PRODUCTION;
 const morganOption: MorganOption = isProduction ? MORGAN_OPTIONS.TINY : MORGAN_OPTIONS.COMMON;
 
-app.use(express.static('public'));
-app.use(morgan(morganOption));
-app.use(helmet());
-app.use(express.json());
+server.use(express.static('public'));
+server.use(morgan(morganOption));
+server.use(helmet());
+server.use(express.json());
 
-app.use(cors());
-app.set('view engine', 'ejs');
+server.use(cors());
+server.set('view engine', 'ejs');
 
-app.get("/", (_req: Request, res: Response) => {
+server.get("/", (_req: Request, res: Response) => {
   // res.send(SERVER_MESSAGES.SERVER_STARTED);
   res.render('index', { message: SERVER_MESSAGES.SERVER_STARTED });
 });
 
-app.use('/api/auth', authRouter);
-app.use('/api/user-coins', userCoinsRouter);
-app.use('/api/cryptocompare', cryptoCompareRouter)
-app.use(errorHandler);
+server.use('/api/auth', authRouter);
+server.use('/api/user-coins', userCoinsRouter);
+server.use('/api/cryptocompare', cryptoCompareRouter)
+server.use(errorHandler);
 
 function errorHandler(error: unknown, _req: Request, res: Response, _next: NextFunction) {
   const code = get(error, 'status', 500);
@@ -52,4 +52,4 @@ function errorHandler(error: unknown, _req: Request, res: Response, _next: NextF
     .json(response);
 };
 
-export { app };
+export { server };

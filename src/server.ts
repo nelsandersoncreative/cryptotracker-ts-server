@@ -1,6 +1,6 @@
 import knex from 'knex';
 
-import { app } from './index';
+import { server } from './index';
 import { config } from './config';
 import { createTables } from './utils/createTables';
 import { ENVIRONMENTS } from './utils/constants';
@@ -29,8 +29,8 @@ const db = knex({
   debug: isDevelopment
 });
 
-app.set('db', db);
+server.set('db', db);
 
 createTables(db); // Check if tables exist, if they don't run migrations
-
-app.listen(PORT, () => console.debug(`Server listening on port: ${PORT}`));
+console.log('PORT', PORT)
+server.listen(PORT, () => console.debug(`Server listening on port: ${PORT}`));
