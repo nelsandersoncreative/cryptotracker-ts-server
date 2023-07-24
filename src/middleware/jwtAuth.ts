@@ -15,9 +15,8 @@ export const requireAuth = async (req: Request, _res: Response, next: NextFuncti
 
   try {
     const payload = AuthService.verifyJwt(token);
-    const connection = await req.app.get('db').getConnection();
-    const user = await UserService.findByEmail(connection, payload.sub as any);
-    connection.release();
+    const user = await UserService.findByEmail(req.app.get('db'), payload.sub as any);
+
     if (!user) {
       return next({ status: 401, message: 'Unauthorized request'});
     }

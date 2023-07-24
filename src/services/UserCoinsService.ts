@@ -10,10 +10,14 @@ export interface Row {
 
 export const UserCoinsService = {
   getUserCoins: async (knex: Knex, user_id: number) => {
-    return knex('user_coins')
-      .select('coins')
-      .where({ user_id })
-      .then((coins: { coins: string[] }[]) => coins);
+    try {
+      return knex('user_coins')
+        .select('coins')
+        .where({ user_id })
+        .then((coins: { coins: string[] }[]) => coins);
+    } catch (error) {
+      console.error(error);
+    }
   },
   createCoinsList: async (knex: Knex, coins: string[], user_id: number) => {
     return knex('user_coins')

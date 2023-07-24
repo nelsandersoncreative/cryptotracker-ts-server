@@ -76,13 +76,11 @@ authRouter
     const { user_email, user_password } = req.body;
     const cancelRequest = !user_email || !user_password;
 
-    const connection = await req.app.get('db').getConnection();
-
     if (cancelRequest) {
       return next({ status: 400, message: MESSAGES.ENTER_CREDENTIALS });
     }
 
-    const user = await UserService.findByEmail(connection, user_email);
+    const user = await UserService.findByEmail(req.app.get('db'), user_email);
 
     if (!user) {
       return next({ status: 401, message: MESSAGES.INVALID_CREDENTIALS });
@@ -98,8 +96,6 @@ authRouter
     const payload = { user_id: user.id };
 
     const authToken = AuthService.createJwt(sub, payload);
-
-    connection.release();
 
     if (!authToken) {
       next({ status: 500, message: authToken });

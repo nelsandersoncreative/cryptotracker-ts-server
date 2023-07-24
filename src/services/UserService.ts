@@ -59,9 +59,13 @@ export const UserService = {
   },
 
   findByEmail(knex: Knex, user_email: string) {
-    return knex('users')
-      .where({user_email})
-      .first('*');
+    try {
+      return knex('users')
+        .where({user_email})
+        .first('*');
+    } catch (error) {
+      console.error(error);
+    }
   },
 
   serialize(user: User) {
