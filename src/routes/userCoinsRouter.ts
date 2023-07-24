@@ -13,7 +13,7 @@ const userCoinsRouter = express.Router();
  * @Headers Auth bearer token
  * pass in user id in params
  */
-// the token system currently allows you to fetch any user's info with the token
+// TODO the token system currently allows you to fetch any user's info with your token
 userCoinsRouter
   .route('/:id')
   .get(requireAuth, async (req: Request, res: Response, next: NextFunction) => {
@@ -24,7 +24,7 @@ userCoinsRouter
       if (!coinsArray) {
         return next({status: 404, message: `Unable to find a list of coins with id: ${id}`});
       }
-      console.log('COINS_ARRAY', coinsArray);
+
       res.json(coinsArray);
    } catch(err) {
       next({status: 500, message: err.message});
