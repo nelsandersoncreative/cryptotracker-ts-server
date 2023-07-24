@@ -1,18 +1,8 @@
 import dotenv from 'dotenv';
-
 import { Config } from './types/Config';
 import { ENVIRONMENTS as ENV } from './utils/constants';
 
 dotenv.config();
-
-// const setDatabaseUrl = (env: Environment) => {
-//   const isProduction = env === ENV.PRODUCTION;
-//   const isDevelopment = env === ENV.DEVELOPMENT;
-
-//   return (isProduction && process.env.DATABASE_URL)
-//     || (isDevelopment && process.env.DEV_DATABASE_URL)
-//     || process.env.TEST_DATABASE_URL;
-// };
 
 export const config: Config = {
   PORT: process.env.PORT,

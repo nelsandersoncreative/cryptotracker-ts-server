@@ -18,7 +18,6 @@ const { NODE_ENV } = config;
 
 const server: Express = express();
 
-// env variables for localhost and heroku
 const isProduction = NODE_ENV === ENVIRONMENTS.PRODUCTION;
 const morganOption: MorganOption = isProduction ? MORGAN_OPTIONS.TINY : MORGAN_OPTIONS.COMMON;
 
@@ -31,7 +30,6 @@ server.use(cors());
 server.set('view engine', 'ejs');
 
 server.get("/", (_req: Request, res: Response) => {
-  // res.send(SERVER_MESSAGES.SERVER_STARTED);
   res.render('index', { message: SERVER_MESSAGES.SERVER_STARTED });
 });
 
