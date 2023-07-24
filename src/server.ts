@@ -26,6 +26,10 @@ const db = knex({
     database: DB_NAME,
     password: DB_PASSWORD,
   },
+  pool: {
+    min: 2, // Minimum number of connections in the pool
+    max: 10, // Maximum number of connections in the pool
+  },
   debug: isDevelopment
 });
 
