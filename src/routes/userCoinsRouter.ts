@@ -18,17 +18,20 @@ userCoinsRouter
   .route('/:id')
   .get(requireAuth, async (req: Request, res: Response, next: NextFunction) => {
     const { app, params: { id } } = req;
+    const connection = app.get('db').getConnection();
     try {
-      const coinsArray = await UserCoinsService.getUserCoins(app.get('db'), id as any);
+      const coinsArray = await UserCoinsService.getUserCoins(connection, id as any);
 
       if (!coinsArray) {
         return next({status: 404, message: `Unable to find a list of coins with id: ${id}`});
       }
       console.log('COINS_ARRAY', coinsArray);
+      connection.release()
       res.json(coinsArray);
    } catch(err) {
       next({status: 500, message: err.message});
     }
+
   });
 
 /**
